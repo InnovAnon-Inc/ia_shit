@@ -39,6 +39,7 @@ def _main(*path_globs:str, commit:bool=True,)->None:
 		_args.extend([ '--path-glob', path_glob, ])
 	if (not commit):
 		_args.insert(0, '--force')
+
 	logger.info('cmd: %s', _args,)
 	args               :FilteringOptions = FilteringOptions.parse_args(_args,)
 	#if args.analyze:
@@ -47,6 +48,14 @@ def _main(*path_globs:str, commit:bool=True,)->None:
 	assert (not args.analyze)
 	filter             :RepoFilter       = RepoFilter(args,)
 	filter.run()
+
+	# TODO git add remote origin https://...
+	# TODO git fetch
+	# TODO git branch --set-upstream-to origin/main main
+	# TODO git add .
+	# TODO git commit -m ...
+	# TODO git pull
+	# TODO git push
 
 def main()->None:
 	commit             :bool      = False # TODO
