@@ -41,7 +41,7 @@ def _main(path_glob:str, commit:bool,)->None:
 	filter.run()
 
 def main()->None:
-	commit             :bool      = True
+	commit             :bool      = False # TODO
 	if commit:
 		repo       :Repo      = Repo()
 		repo.git.add(all=True,)
