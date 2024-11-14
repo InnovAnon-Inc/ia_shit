@@ -48,6 +48,8 @@ def main()->None:
 		message    :str       = 'Backup before Obliteration'
 		repo.index.commit(message,)
 		logger.info('%s', message,)
+	else:
+		logger.warn('Not creating backup')
 
 	ignore_path        :Path      = Path('.gitignore')
 	assert ignore_path.is_file()
