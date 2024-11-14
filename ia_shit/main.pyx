@@ -31,6 +31,8 @@ def not_comment(line:str,)->bool:
 
 def _main(*path_globs:str, commit:bool=True,)->None:
 	assert path_globs
+	assert all((isinstance(path_glob,str) for path_glob in path_globs))
+
 	_args              :List[str]        = [ '--invert-paths', ]
 	for path_glob in path_globs:
 		logger.debug('appending: %s', path_glob,)
@@ -72,7 +74,7 @@ def main()->None:
 	logger.debug('to-nuke: %s', ''.join(ignores))
 	try:
 		pause_main()
-		_main(ignores, commit=commit,)
+		_main(*ignores, commit=commit,)
 	except IndefinitePauseError as error:
 		logger.error(error)
 
