@@ -17,6 +17,7 @@ from git_filter_repo                         import RepoFilter
 from structlog                               import get_logger
 
 from ia_pause.main                           import main as pause_main
+from ia_pause.main                           import IndefinitePauseError
 
 logger           = get_logger()
 comment:Pattern  = re.compile('^\s*#')
@@ -69,9 +70,11 @@ def main()->None:
 	setup_gettext()
 	logger.info('nuking %s globs', len(ignores),)
 	logger.debug('to-nuke: %s', ''.join(ignores))
-	result             :bool      = pause_main()
-	if result:
+	try:
+		pause_main()
 		_main(ignores, commit=commit,)
+	except IndefinitePauseError as error:
+		logger.error(error)
 
 if __name__ == '__main__':
 	main()
