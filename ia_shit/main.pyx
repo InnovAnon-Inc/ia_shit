@@ -6,6 +6,7 @@
 
 from pathlib                                 import Path
 from re                                      import Pattern
+import re
 from typing                                  import List, Optional, Iterable
 
 from git                                     import Repo
@@ -59,7 +60,7 @@ def main()->None:
 	pause_main()
 
 	setup_gettext()
-	comment:Pattern = Pattern.compile('^[[:whitespace:]]*#')
+	comment:Pattern = re.compile('^[[:whitespace:]]*#')
 	for ignore in ignores:
 		if comment.matches(ignore):
 			logger.debug('comment: %s', ignore,)
