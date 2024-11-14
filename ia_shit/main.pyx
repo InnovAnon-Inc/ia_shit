@@ -4,7 +4,6 @@
 
 """ Purge Repo """
 
-import os
 from pathlib                                 import Path
 from typing                                  import List, Optional, Iterable
 from typing                                  import ParamSpec
