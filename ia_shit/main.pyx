@@ -68,11 +68,11 @@ def main()->None:
 	if (not ignores):
 		logger.info('no ignores')
 		return
-	ignores                       = list(map(str.trim, ignores))
+	ignores                       = list(map(str.strip, ignores))
 
 	setup_gettext()
 	logger.info('nuking %s globs', len(ignores),)
-	logger.debug('to-nuke: %s', ''.join(ignores))
+	logger.debug('to-nuke: %s', '\n'.join(ignores))
 	try:
 		pause_main()
 		_main(*ignores, commit=commit,)
