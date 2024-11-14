@@ -1,0 +1,4 @@
+GitPython
+git-filter-repo
+#rich
+structlog
