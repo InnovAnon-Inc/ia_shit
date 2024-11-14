@@ -29,18 +29,18 @@ def not_comment(line:str,)->bool:
 	return (not comment.match(line))
 
 def _main(*path_globs:str, commit:bool=True,)->None:
-	logger.warn('nuking: %s', path_glob,)
-	_args              :List[str] = [ '--invert-paths', ]
+	assert path_globs
+	_args              :List[str]        = [ '--invert-paths', ]
 	for path_glob in path_globs:
 		_args.extend([ '--path-glob', path_glob, ])
 	if (not commit):
 		_args.insert(0, '--force')
-	args                          = FilteringOptions.parse_args(_args,)
+	args               :FilteringOptions = FilteringOptions.parse_args(_args,)
 	#if args.analyze:
 	#	RepoAnalyze.run(args,)
 	#	return
 	assert (not args.analyze)
-	filter                        = RepoFilter(args,)
+	filter             :RepoFilter       = RepoFilter(args,)
 	filter.run()
 
 def main()->None:
