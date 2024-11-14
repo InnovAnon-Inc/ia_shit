@@ -60,7 +60,7 @@ def main()->None:
 	pause_main()
 
 	setup_gettext()
-	comment:Pattern = re.compile('^[[:space:]]*#')
+	comment:Pattern = re.compile('^\s*#')
 	for ignore in ignores:
 		if comment.match(ignore):
 			logger.debug('comment: %s', ignore,)
