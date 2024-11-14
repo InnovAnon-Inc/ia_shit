@@ -7,7 +7,7 @@
 from pathlib                                 import Path
 from re                                      import Pattern
 import re
-from typing                                  import List, Optional, Iterable
+from typing                                  import Callable, List, Optional, Iterable
 
 from git                                     import Repo
 from git_filter_repo                         import setup_gettext
@@ -19,17 +19,20 @@ from structlog                               import get_logger
 from ia_pause.main                           import main as pause_main
 
 logger           = get_logger()
+comment:Pattern  = re.compile('^\s*#')
 
 ##
 #
 ##
 
-def _main(path_glob:str, commit:bool,)->None:
+def not_comment(line:str,)->bool:
+	return (not comment.match(line))
+
+def _main(*path_globs:str, commit:bool=True,)->None:
 	logger.warn('nuking: %s', path_glob,)
-	_args              :List[str] = [
-		'--invert-paths',
-		'--path-glob', path_glob,
-	]
+	_args              :List[str] = [ '--invert-paths', ]
+	for path_glob in path_globs:
+		_args.extend([ '--path-glob', path_glob, ])
 	if (not commit):
 		_args.insert(0, '--force')
 	args                          = FilteringOptions.parse_args(_args,)
@@ -56,17 +59,16 @@ def main()->None:
 	with ignore_path.open('r',) as f:
 		ignores    :List[str] = f.readlines()
 	assert ignores
+	ignores                       = list(filter(not_comment, ignores))
+	if (not ignores):
+		logger.info('no ignores')
+		return
 
 	setup_gettext()
-	comment            :Pattern             = re.compile('^\s*#')
-	not_comment        :Callable[[str],str] = lambda i: (not comment.match(i))
-	ignores                                 = list(filter(not_comment, ignores))
 	logger.info('nuking %s globs', len(ignores),)
-	logger.debug('to-nuke: %s', '\n'.join(ignores))
+	logger.debug('to-nuke: %s', ''.join(ignores))
 	pause_main()
-	logger.debug('comment: %s', ignore,)
-			continue
-		_main(path_glob=ignore, commit=commit,)
+	_main(ignores, commit=commit,)
 
 if __name__ == '__main__':
 	main()
