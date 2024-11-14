@@ -36,6 +36,7 @@ def _main(*path_globs:str, commit:bool=True,)->None:
 		_args.extend([ '--path-glob', path_glob, ])
 	if (not commit):
 		_args.insert(0, '--force')
+	logger.info('cmd: %s', _args,)
 	args               :FilteringOptions = FilteringOptions.parse_args(_args,)
 	#if args.analyze:
 	#	RepoAnalyze.run(args,)
