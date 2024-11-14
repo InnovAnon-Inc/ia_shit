@@ -47,6 +47,7 @@ def main()->None:
 		repo.git.add(all=True,)
 		message    :str       = 'Backup before Obliteration'
 		repo.index.commit(message,)
+		logger.info('%s', message,)
 
 	ignore_path        :Path      = Path('.gitignore')
 	assert ignore_path.is_file()
