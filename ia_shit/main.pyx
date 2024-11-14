@@ -43,7 +43,7 @@ def _main(path_glob:str, commit:bool,)->None:
 def main()->None:
 	commit             :bool      = True
 	if commit:
-		repo       :Repo
+		repo       :Repo      = Repo()
 		repo.git.add(all=True,)
 		message    :str       = 'Backup before Obliteration'
 		repo.index.commit(message,)
