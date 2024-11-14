@@ -68,6 +68,7 @@ def main()->None:
 	if (not ignores):
 		logger.info('no ignores')
 		return
+	ignores                       = list(map(str.trim, ignores))
 
 	setup_gettext()
 	logger.info('nuking %s globs', len(ignores),)
