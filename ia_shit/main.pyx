@@ -62,7 +62,7 @@ def main()->None:
 	setup_gettext()
 	comment:Pattern = re.compile('^[[:whitespace:]]*#')
 	for ignore in ignores:
-		if comment.matches(ignore):
+		if comment.match(ignore):
 			logger.debug('comment: %s', ignore,)
 			continue
 		_main(path_glob=ignore, commit=commit,)
