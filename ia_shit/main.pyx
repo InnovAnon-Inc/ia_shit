@@ -67,8 +67,9 @@ def main()->None:
 	setup_gettext()
 	logger.info('nuking %s globs', len(ignores),)
 	logger.debug('to-nuke: %s', ''.join(ignores))
-	pause_main()
-	_main(ignores, commit=commit,)
+	result             :bool      = pause_main()
+	if result:
+		_main(ignores, commit=commit,)
 
 if __name__ == '__main__':
 	main()
