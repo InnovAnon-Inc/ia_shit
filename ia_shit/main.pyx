@@ -15,6 +15,8 @@ from git_filter_repo                         import FilteringOptions
 from git_filter_repo                         import RepoFilter
 from structlog                               import get_logger
 
+from ia_pause.main                           import main as pause_main
+
 P     :ParamSpec = ParamSpec('P')
 logger           = get_logger()
 
@@ -51,6 +53,7 @@ def main()->None:
 	with ignore_path.open('r',) as f:
 		ignores    :List[str] = f.readlines()
 	logger.info('nuking %s globs', len(ignores),)
+	logger.debug('to-nuke: %s', '\n'.join(ignores))
 
 	setup_gettext()
 	for ignore in ignores:
