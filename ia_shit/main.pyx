@@ -55,15 +55,16 @@ def main()->None:
 	assert ignore_path.is_file()
 	with ignore_path.open('r',) as f:
 		ignores    :List[str] = f.readlines()
+	assert ignores
+
+	setup_gettext()
+	comment            :Pattern             = re.compile('^\s*#')
+	not_comment        :Callable[[str],str] = lambda i: (not comment.match(i))
+	ignores                                 = list(filter(not_comment, ignores))
 	logger.info('nuking %s globs', len(ignores),)
 	logger.debug('to-nuke: %s', '\n'.join(ignores))
 	pause_main()
-
-	setup_gettext()
-	comment:Pattern = re.compile('^\s*#')
-	for ignore in ignores:
-		if comment.match(ignore):
-			logger.debug('comment: %s', ignore,)
+	logger.debug('comment: %s', ignore,)
 			continue
 		_main(path_glob=ignore, commit=commit,)
 
