@@ -1,1 +1,3 @@
-hiddenimports = [ ]
+hiddenimports = [
+	'progress.bar',
+]
