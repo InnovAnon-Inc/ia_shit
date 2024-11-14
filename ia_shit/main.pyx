@@ -6,7 +6,6 @@
 
 from pathlib                                 import Path
 from typing                                  import List, Optional, Iterable
-from typing                                  import ParamSpec
 
 from git                                     import Repo
 from git_filter_repo                         import setup_gettext
@@ -17,7 +16,6 @@ from structlog                               import get_logger
 
 from ia_pause.main                           import main as pause_main
 
-P     :ParamSpec = ParamSpec('P')
 logger           = get_logger()
 
 ##
