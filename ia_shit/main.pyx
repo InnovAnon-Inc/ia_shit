@@ -54,6 +54,7 @@ def main()->None:
 		ignores    :List[str] = f.readlines()
 	logger.info('nuking %s globs', len(ignores),)
 	logger.debug('to-nuke: %s', '\n'.join(ignores))
+	pause_main()
 
 	setup_gettext()
 	for ignore in ignores:
