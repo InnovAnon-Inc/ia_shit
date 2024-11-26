@@ -4,7 +4,8 @@ services:
     build:
       context:        .
       tags:
-        - ia_shit:latest
+        - innovanon/ia_shit:latest
+        -           ia_shit:latest
     restart:          no
     logging:
       driver:         syslog   
