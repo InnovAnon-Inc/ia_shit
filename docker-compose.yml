@@ -5,9 +5,9 @@ services:
       context:        .
       tags:
         - innovanon/ia_shit:latest
-        -           ia_shit:latest
-        - innovanon/ia_shit
-        -           ia_shit
+    #    -           ia_shit:latest
+    #    - innovanon/ia_shit
+    #    -           ia_shit
     image:            innovanon/ia_shit
     restart:          no
     logging:
